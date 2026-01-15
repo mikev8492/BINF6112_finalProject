@@ -9,6 +9,8 @@ mvillar6@charlotte.edu
 UNCC ID: 801504997
 
 **Kayla Williams**
+kwill423@charlotte.edu
+UNCC ID: 801489303
 
 **Bobby Luker**
 
