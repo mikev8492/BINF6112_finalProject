@@ -9,5 +9,4 @@ Build a tool that takes information from databases like NCBI to identify and ret
 - Recieve plasmid genome as input and parse through the genome to identify locations for reference restriction enzyme motifs 
   
 ### Expected Outcomes
-- Return list of Restriction enzymes, corresponding motif, and cutting point present in a user friendly format
-- 
+- Return list of Restriction enzymes, corresponding motif, and cutting point present in a user friendly format 
