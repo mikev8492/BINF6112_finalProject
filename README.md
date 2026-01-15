@@ -13,4 +13,5 @@ kwill423@charlotte.edu
 UNCC ID: 801489303
 
 **Bobby Luker**
-
+rluker@charlotte.edu
+UNCC ID: 801484356
