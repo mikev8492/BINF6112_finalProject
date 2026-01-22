@@ -1,6 +1,11 @@
 # BINF6112_finalProject
 UNCC BINF6112 - Programming II final project. 
 
+## License:
+**GNU General Public License Version 3**
+
+
+
 [Project URL](https://github.com/mikev8492/BINF6112_finalProject)
 
 ## Group members:
