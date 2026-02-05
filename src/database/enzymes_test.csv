@@ -1,5 +1,35 @@
-Enzyme ,RecognitionSequence ,Cut ,Overhang
-AatII, 5'- G A C G T/C -'3 , 5'-GACGT      C-3', 3' ACGT
-AbaSI, 5'- C N N N N N N N N N N N/N N N N N N N N N G -'3, 5'-CNNNNNNNNNNN      NNNNNNNNNG-3', 3' NN
-Acc65I,	5'- G/G T A C C -'3, 5'-G      GTACC-3', 5' GTAC
-...
+Enzyme,RecognitionSequence
+AclI,AA/CGTT
+HindIII,A/AGCTT
+HindIII-HF®,A/AGCTT
+SspI-HF®,AAT/ATT
+MluCI,/AATT
+PciI,A/CATGT
+AgeI-HF®,A/CCGGT
+BfuAI,ACCTGC(4/8)
+BspMI,ACCTGC(4/8)
+SexAI,A/CCWGGT
+MluI-HF®,A/CGCGT
+BceAI,ACGGC(12/14)
+HpyCH4IV,A/CGT
+HpyCH4III,ACN/GT
+BaeI,(10/15)ACNNNNGTAYC(12/7)
+BsaXI,(9/12)ACNNNNNCTCC(10/7)
+AflIII,A/CRYGT
+SpeI,A/CTAGT
+BsrI,ACTGG(1/-1)
+BmrI,ACTGGG(5/4)
+BglII,A/GATCT
+AfeI,AGC/GCT
+AluI,AG/CT
+StuI,AGG/CCT
+ScaI-HF®,AGT/ACT
+NsiI,ATGCA/T
+AseI,AT/TAAT
+SwaI,ATTT/AAAT
+PaqCI,C/AATTG
+BccI,CCATC(4/5)
+FauI,CCCGC(4/6)
+SmaI,CCC/GGG
+NcoI,C/CATGG
+(Noting: HF® denotes High-Fidelity engineered version)
