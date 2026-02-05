@@ -1,0 +1,5 @@
+Enzyme ,RecognitionSequence ,Cut ,Overhang
+AatII, 5'- G A C G T/C -'3 , 5'-GACGT      C-3', 3' ACGT
+AbaSI, 5'- C N N N N N N N N N N N/N N N N N N N N N G -'3, 5'-CNNNNNNNNNNN      NNNNNNNNNG-3', 3' NN
+Acc65I,	5'- G/G T A C C -'3, 5'-G      GTACC-3', 5' GTAC
+...
