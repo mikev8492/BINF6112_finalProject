@@ -1,18 +1,37 @@
+#!/usr/bin/env python3
+
 """
-This file contains the main function that will perform the logic for the program. 
+This file contains the main functions that will perform the logic for the program. 
 
-1. Setup:
-  - function to pull list of enzymes from online resource and store formatted csv table in database folder
+1. load_REs():
+  - Read enzymes list from database
+  - Parse user input sequence
+  - Get enzyme list input from user
 
-2. User Input:
-  - function to handle how a user would input a sequence and select enzymes to cut with.
+2. motif_regx():
+  - Build regex patterns for enzyme motifs
 
-3. Parser:
-  - function to parse user input sequence using each restriction enzyme
-  - Need to store the results (cut sites, name of enzyme, etc.)
+3. identify_motifs():
+  - Parse sequence using enzyme motifs and record matches
 
-4. Results:
-  - function to render results:
-    - plasmid map with cut sites and name of enzymes identified 
-    - option to restart or edit the map?
+4. generate_RE_map():
+  - Create formatted output
 """
+
+def load_REs():
+    # Read enzyme list and user sequence file
+
+def motif_regx():
+    
+
+def identify_motifs():
+    
+
+def generate_RE_map():
+    
+
+def main():
+
+
+if __name__=="__main__":
+    main()

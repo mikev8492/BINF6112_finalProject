@@ -22,3 +22,38 @@ UNCC ID: 801489303
 **Bobby Luker**
 rluker@charlotte.edu
 UNCC ID: 801484356
+
+## Project File Structure:
+```
+└── 📁BINF6112_finalProject
+    └── 📁inputs
+        └── 📁test
+            ├── pUC19.fasta
+            ├── pUC19.gb
+    └── 📁results
+        ├── plasmid_map.txt
+    └── 📁src
+        └── 📁database
+            ├── enzymes_test.csv
+        ├── main.py
+    ├── ideas.md
+    ├── LICENSE
+    ├── Pseudocode.py
+    └── README.md
+```
+## Instructions:
+1. Place your plasmid sequence file in the `inputs` folder (GenBank or FASTA format). 
+2. Run the following script with your sequence filename:
+```
+./src/main.py inputs/sequence_filename
+```
+
+## Overview:
+REcut is a python3 tool that takes a plasmid sequence file as input and generates an annotated sequence map with Restriction Enzyme cut sites. 
+
+The `src` file contains the following:
+1. `database` : Contains a CSV file of restriction enzymes and recognition sequence motifs. 
+2. `main.py`: Contains the logic for the program.
+    - Loads the user input sequence and restriction enzymes database. 
+    - Parses the plasmid sequence with each enzyme motif to identify cut locations. 
+    - Produces output containing an annotated map of the sequence with the enzyme cut sites in the `results` folder. 
