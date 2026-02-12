@@ -45,6 +45,7 @@ def generate_RE_map():
           2) The full sequence with annotated cut sites*
   High level steps:
     - Generate .csv file and add in information from list and enzyme file 
-    - *Unsure specific steps; we want to have the sequence shown with the cut sites and name of enzymes available
+    - We will research how to do data visualization in python. Specifically, how to highlight text, mark text (cut sites) clearly, and display 
+    the motif and enzyme name that can cut at a specific site.
   '''
 
