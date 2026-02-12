@@ -42,11 +42,13 @@ UNCC ID: 801484356
     └── README.md
 ```
 ## Instructions:
-1. Place your plasmid sequence file in the `inputs` folder (GenBank or FASTA format). 
+1. Place your plasmid sequence file in the `inputs` folder (GenBank or FASTA format).
 2. Run the following script with your sequence filename:
 ```
 ./src/main.py inputs/sequence_filename
 ```
+3. Check which restriction enzymes you want to identify within plasmid sequence using CLI
+4. Review output located in results folder
 
 ## Overview:
 REcut is a python3 tool that takes a plasmid sequence file as input and generates an annotated sequence map with Restriction Enzyme cut sites. 
@@ -56,4 +58,7 @@ The `src` file contains the following:
 2. `main.py`: Contains the logic for the program.
     - Loads the user input sequence and restriction enzymes database. 
     - Parses the plasmid sequence with each enzyme motif to identify cut locations. 
-    - Produces output containing an annotated map of the sequence with the enzyme cut sites in the `results` folder. 
+    - Produces output containing an annotated map of the sequence with the enzyme cut sites in the `results` folder.
+## Troubleshooting:
+1. User inputs incorrect file path and incorrect file type - Check that the file/file path exists, is readable, and is the correct file format (FASTA or GenBank file)
+2. No matches found and updated dictionary returns None - Error will occur and state that no matches were identified and exists program
