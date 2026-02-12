@@ -4,8 +4,23 @@
 This file contains the main functions that will perform the logic for the program. 
 """
 
-def load_REs(file:argv) -> dict:
-   
+def load_REs(file:argv) -> user_enzymes:dict and sequence:str:
+   '''
+   Read in user sequence file and determine if GenBank or FASTA file. Function has designated workflow dependent on file type.
+
+   Parameters
+   ----------
+   Input file
+
+   Returns
+   -------
+   A dictionary that contains selected or default enzymes with motifs 
+   Input sequence as a string
+
+   Raises
+   ------
+   IOError will occur if user does not input file or input file is incorrect format
+   '''
   pass
 
 def motif_regx(motifs:dict) -> dict:
