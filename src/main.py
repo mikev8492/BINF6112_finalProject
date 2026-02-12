@@ -6,11 +6,13 @@ This file contains the main functions that will perform the logic for the progra
 
 def load_REs(file:argv) -> user_enzymes:dict and sequence:str:
    '''
-   Read in user sequence file and determine if GenBank or FASTA file. Function has designated workflow dependent on file type.
+   Read in user sequence file and determine if GenBank or FASTA file. Function has designated workflow dependent on file type. Function will open enzyme database and 
+   parse through for selected enzymes. If no enzymes are selected, a default dictionary will be generated instead.
 
    Parameters
    ----------
    Input file
+   User selected enzymes via CLI
 
    Returns
    -------
