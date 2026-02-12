@@ -2,32 +2,23 @@
 
 """
 This file contains the main functions that will perform the logic for the program. 
-
-1. load_REs():
-  - Read enzymes list from database
-  - Parse user input sequence
-  - Get enzyme list input from user
-
-2. motif_regx():
-  - Build regex patterns for enzyme motifs
-
-3. identify_motifs():
-  - Parse sequence using enzyme motifs and record matches
-
-4. generate_RE_map():
-  - Create formatted output
 """
 
-def load_REs():
-    # Read enzyme list and user sequence file
+def load_REs(file:argv) -> dict:
+   
+  pass
 
-def motif_regx():
+def motif_regx(motifs:dict) -> dict:
+  
+  pass  
+
+def identify_motifs(sequence:str, regx:dict) -> lst:
+
+  pass
     
+def generate_RE_map(sequence:str, regx:dict, identify_motifs:lst) -> file:argv:
 
-def identify_motifs():
-    
-
-def generate_RE_map():
+  pass
     
 
 def main():
