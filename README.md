@@ -57,8 +57,13 @@ The `src` file contains the following:
 1. `database` : Contains a CSV file of restriction enzymes and recognition sequence motifs. 
 2. `main.py`: Contains the logic for the program.
     - Loads the user input sequence and restriction enzymes database. 
-    - Parses the plasmid sequence with each enzyme motif to identify cut locations. 
+    - Parses the plasmid sequence with each enzyme motif to identify cut locations.
     - Produces output containing an annotated map of the sequence with the enzyme cut sites in the `results` folder.
+3. `motif_id_lib`: Contains modules designated for each function within our program. These modules are:
+    - id_motifs.py: Group member responsible- Bobby
+    - input.py: Group member responsible- Michael
+    - output.py: Group member responsible- Michael
+    - regx.py: Group member responsible- Kayla
 ## Troubleshooting:
 1. User inputs incorrect file path and incorrect file type - Check that the file/file path exists, is readable, and is the correct file format (FASTA or GenBank file)
 2. No matches found and updated dictionary returns None - Error will occur and state that no matches were identified and exists program
