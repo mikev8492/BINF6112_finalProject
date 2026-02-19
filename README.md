@@ -35,6 +35,12 @@ UNCC ID: 801484356
     └── 📁src
         └── 📁database
             ├── enzymes_test.csv
+        └── 📁motif_id_lib
+            ├── __init__.py
+            ├── id_motifs.py
+            ├── input.py
+            ├── output.py
+            ├── regx.py
         ├── main.py
     ├── ideas.md
     ├── LICENSE
