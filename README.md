@@ -35,7 +35,9 @@ UNCC ID: 801484356
     └── 📁src
         └── 📁database
             ├── enzymes_test.csv
+            ├── enzymes.csv
         └── 📁motif_id_lib
+            └── 📁__pycache__
             ├── __init__.py
             ├── id_motifs.py
             ├── input.py
@@ -47,14 +49,38 @@ UNCC ID: 801484356
     ├── Pseudocode.py
     └── README.md
 ```
+
+## Testing Instructions:
+Date: 2/26/2026
+
+Added input.py classes to load user plasmid sequence and enzymes list. 
+
+1. Run the following command to test:
+```
+python3 main.py ../inputs/test/pUC19.fasta
+
+or 
+
+python3 main.py ../inputs/test/pUC19.gb
+```
+2. Use arrows to move down checkbox list and click "space" to select enzymes. 
+
+
+Expected Output:
+
+- Terminal interface displays with application header and checkbox for user to select restriction enzymes to cut with
+- prints Plasmid object (list[header, sequence]) and enzyme object (dict{enzyme: [motif, cut]})
+
+
 ## Instructions:
 1. Place your plasmid sequence file in the `inputs` folder (GenBank or FASTA format).
 2. Run the following script with your sequence filename:
 ```
-./src/main.py inputs/sequence_filename
+./src/main.py ../inputs/sequence_filename
 ```
 3. Check which restriction enzymes you want to identify within plasmid sequence using CLI
 4. Review output located in results folder
+
 
 ## Overview:
 REcut is a python3 tool that takes a plasmid sequence file as input and generates an annotated sequence map with Restriction Enzyme cut sites. 
