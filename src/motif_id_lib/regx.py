@@ -1,22 +1,4 @@
-import input 
-import sys
-
 class RegX
-
-  def __init__(self, enzyme_dict):
-    self.enzyme_dict = enzyme_dict
-    self.updated_dict = {}
-
-  def dict_check(self) -> dict:
-    '''
-    Purpose: Checks the argument is a dictionary before proceeding
-    Input: Dictonary
-    Output: Updated dictionary
-    '''
-    if not isinstance(enzyme_dict, dict):
-      sys.stderr("Error: Argument is not a dictionary")
-    else:
-      sys.stdout("Dictionary accepted...")
       
   def motif_regx(self):
     '''
