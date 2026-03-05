@@ -51,20 +51,28 @@ UNCC ID: 801484356
 ```
 
 ## Testing Instructions:
-Date: 2/26/2026
+Date: 3/5/2026
 
 Added input.py classes to load user plasmid sequence and enzymes list. 
 
-1. Run the following command to test:
+1. Create the environment:
 ```
-python3 main.py ../inputs/test/pUC19.fasta
+conda env create -f environmnet.yml
+```
+   - Conda will automatically create an environment named finalproj with all the specified packages and versions.
+2. Activate the environment:
+```
+conda activate finalproj
+```
+3. Run following command to test:
+```
+python main.py ../inputs/test/pUC19.fasta
 
 or 
 
-python3 main.py ../inputs/test/pUC19.gb
+python main.py ../inputs/test/pUC19.gb
 ```
-2. Use arrows to move down checkbox list and click "space" to select enzymes. 
-
+4. Use arrows to move down checkbox list and click "space" to select enzymes. 
 
 Expected Output:
 
