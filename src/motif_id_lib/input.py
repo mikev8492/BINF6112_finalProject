@@ -87,7 +87,7 @@ class Enzymes:
         """""
         usr_enzymes = [
             inquirer.Checkbox('enzymes',
-                                message="Choose your enzymes below (use the space bar to select):",
+                                message="Choose your enzymes below (use the arrows and space bar to select):",
                                 choices= self.renzymes.keys(),
                                 default=['XhoI','BamHI','EcoRI']
                                 ),
