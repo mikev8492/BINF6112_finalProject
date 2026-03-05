@@ -15,7 +15,7 @@ We chose to use the GNU GPL to make our code easily accessible for anyone to use
 mvillar6@charlotte.edu
 UNCC ID: 801504997
 
-**Kayla Williams**
+**Kayla Ball**
 kwill423@charlotte.edu
 UNCC ID: 801489303
 
