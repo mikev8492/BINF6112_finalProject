@@ -34,16 +34,22 @@ UNCC ID: 801484356
         ├── plasmid_map.txt
     └── 📁src
         └── 📁database
-            ├── enzymes_test.csv
             ├── enzymes.csv
         └── 📁motif_id_lib
             └── 📁__pycache__
+                ├── __init__.cpython-314.pyc
+                ├── __init__.cpython-39.pyc
+                ├── input.cpython-314.pyc
+                ├── input.cpython-39.pyc
             ├── __init__.py
             ├── id_motifs.py
             ├── input.py
             ├── output.py
             ├── regx.py
         ├── main.py
+    ├── dependencies.txt
+    ├── environment-from-history.yml
+    ├── environment.yml
     ├── ideas.md
     ├── LICENSE
     ├── Pseudocode.py
@@ -59,11 +65,11 @@ Added input.py classes to load user plasmid sequence and enzymes list.
 
 For linux:
 ```bash
-conda env create -f environmnet.yml
+conda env create -f environment.yml
 ```
-For MacOS
+For MacOS:
 ```bash
-conda env create -f environmnet-from-history.yml
+conda env create -f environment-from-history.yml
 ```
    - Conda will automatically create an environment named finalproj with all the specified packages and versions.
 2. Activate the environment:
