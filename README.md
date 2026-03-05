@@ -71,18 +71,23 @@ For MacOS:
 ```bash
 conda env create -f environment-from-history.yml
 ```
-   - Conda will automatically create an environment named finalproj with all the specified packages and versions.
+Conda will automatically create an environment named finalproj with all the specified packages and versions.
+
+**Note:** if environment does not install on MacOS, install dependencies manually and run step 3. using installed python version. 
+
 2. Activate the environment:
 ```bash
 conda activate finalproj
 ```
 3. Run following command to test:
 ```bash
+cd src
 python main.py ../inputs/test/pUC19.fasta
 
 ```
 or
 ```bash
+cd src
 python main.py ../inputs/test/pUC19.gb
 ```
 4. Use arrows to move down checkbox list and click "space" to select enzymes. 
