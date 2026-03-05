@@ -56,20 +56,27 @@ Date: 3/5/2026
 Added input.py classes to load user plasmid sequence and enzymes list. 
 
 1. Create the environment:
-```
+
+For linux:
+```bash
 conda env create -f environmnet.yml
+```
+For MacOS
+```bash
+conda env create -f environmnet-from-history.yml
 ```
    - Conda will automatically create an environment named finalproj with all the specified packages and versions.
 2. Activate the environment:
-```
+```bash
 conda activate finalproj
 ```
 3. Run following command to test:
-```
+```bash
 python main.py ../inputs/test/pUC19.fasta
 
-or 
-
+```
+or
+```bash
 python main.py ../inputs/test/pUC19.gb
 ```
 4. Use arrows to move down checkbox list and click "space" to select enzymes. 

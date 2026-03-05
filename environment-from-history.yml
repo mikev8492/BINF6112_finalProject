@@ -1,0 +1,11 @@
+name: finalproj
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.14
+  - biopython
+  - termcolor
+  - inquirer
+prefix: /home/mikev8492/miniconda3/envs/finalproj
