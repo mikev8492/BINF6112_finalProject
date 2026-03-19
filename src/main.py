@@ -7,6 +7,52 @@ from motif_id_lib.input import Sequence, Enzymes
 This file contains the main functions that will perform the logic for the program. 
 """
 
+def create_parser() -> argparse.Namespace:
+    '''
+    Description: 
+        Defines each CLI for the program
+
+    Args:
+        None
+
+    Returns:
+
+    Raises:
+        None
+    '''
+    motif_parser = argparse.ArgumentParser(description="")
+
+    motif_parser.add_argument("-s", "--sequence_filepath",
+                            type=str, default="inputs/test/pUC19.fasta", 
+                            help="Path to the input sequence file. Accepted formats: FASTA (fasta, .fas, .fa, .fna, .ffn, .faa, .mpfa, .frn) or GenBank (.gb, .gbk).")
+
+    return motif_parser.parse_args()
+
+
+def validate_arguments(args: argparse.Namespace) -> bool:
+    '''
+    Description: 
+        Validate the command-line arguments
+
+    Args:
+        args (argparse.Namespace): Parsed command-line arguments
+
+    Returns:
+        bool: True if arguments are valid, False otherwise
+
+    Raises:
+        ValueError: If any argument is invalid
+    '''
+    genbank_extensions = ('.gb', '.gbk')
+    fasta_extensions = ('.fasta', '.fas', '.fa', '.fna', '.ffn', '.faa', '.mpfa', '.frn')
+
+    if not args.sequence_filepath.split(".")[-1] in genbank_extensions and not args.sequence_filepath.split(".")[-1] in fasta_extensions:
+        raise ValueError("Error: Invalid file type. Please provide a .fasta, .fa, or .txt file.", 'red')
+        return False
+
+
+    return True
+
 
 def create_db():
     starting_enzyme_list = [
@@ -41,10 +87,14 @@ def create_db():
 
 
 def main():
+
+# Could this be used to make it easier for the input.py class to determine the file type?    
+    args = create_parser()
     # create_db()
 
+
     # load and parse sequence 
-    user_file = Sequence(sys.argv[1])
+    user_file = Sequence(args.sequence_filepath)
     user_file.load_sequence()
 
     # plasmid: list [header, seq]

@@ -1,4 +1,4 @@
-name: prog2_motif
+name: finalproj
 channels:
 - conda-forge
 dependencies:
