@@ -84,7 +84,6 @@ conda activate finalproj
 3. Run following command to test:
 ```bash
 python src/main.py inputs/test/pUC19.fasta
-
 ```
 or
 ```bash

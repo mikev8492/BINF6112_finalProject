@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-import sys
+import sys, argparse
 from Bio.Restriction import CommOnly
-from termcolor import colored, cprint
 from motif_id_lib.input import Sequence, Enzymes
 
 """
@@ -40,11 +39,6 @@ def create_db():
                 # print(f"{enzyme}: {enzyme.site},  {enzyme.elucidate()}")
                 file.write(f"{enzyme},{enzyme.site},{enzyme.elucidate()}\n")
 
-def app_header():
-    """
-    Prints application header in the terminal.
-    """
-    print(colored("\nREcut: Plasmid Sequence Cutting Tool\n", 'cyan', on_color='on_dark_grey', attrs=[ 'blink']))
 
 def main():
     create_db()
@@ -52,7 +46,7 @@ def main():
     # load and parse sequence 
     user_file = Sequence(sys.argv[1])
     user_file.load_sequence()
-    app_header()
+
     # plasmid: list [header, seq]
     plasmid = user_file.sequence
 

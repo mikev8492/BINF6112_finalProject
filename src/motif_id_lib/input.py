@@ -1,5 +1,6 @@
 
 import inquirer, sys, re
+from termcolor import colored, cprint
 
 class Sequence:
     """
@@ -81,10 +82,17 @@ class Enzymes:
                 line = line.split(",")
                 self.renzymes[line[0]] = [line[1],line[2].strip()]
 
+    def app_header(self) -> None:
+        """
+        Prints application header in the terminal.
+        """
+        print(colored("\nREcut: Plasmid Sequence Cutting Tool\n", 'cyan', on_color='on_dark_grey', attrs=[ 'blink']))
+
     def interface(self) -> None:
         """
         Produces checkbox for user to filter enzyme dict. (default set manually)
         """""
+        self.app_header()
         usr_enzymes = [
             inquirer.Checkbox('enzymes',
                                 message="Choose your enzymes below (use the arrows and space bar to select):",
