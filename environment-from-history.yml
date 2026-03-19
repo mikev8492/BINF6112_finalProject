@@ -53,4 +53,3 @@ dependencies:
   - libstdcxx==15.2.0=h934c35e_18
   - packaging==26.0=pyhcf101f3_0
   - openblas==0.3.30=pthreads_h6ec200e_4
-prefix: /home/mikev8492/miniconda3/envs/finalproj

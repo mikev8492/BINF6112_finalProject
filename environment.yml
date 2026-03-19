@@ -54,4 +54,3 @@ dependencies:
   - wheel=0.46.3=pyhd8ed1ab_0
   - xmod=1.8.1=pyhd8ed1ab_1
   - zstd=1.5.7=hb78ec9c_6
-prefix: /home/mikev8492/miniconda3/envs/finalproj

@@ -55,11 +55,13 @@ UNCC ID: 801484356
     ├── Pseudocode.py
     └── README.md
 ```
+## Development Log:
+Date: 3/19/2026
+- updated relative filepaths to run main.py from root project directory.
+- 
 
 ## Testing Instructions:
 Date: 3/19/2026
-
-Added input.py classes to load user plasmid sequence and enzymes list. 
 
 1. Create the environment:
 
