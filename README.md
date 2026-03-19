@@ -59,6 +59,9 @@ UNCC ID: 801484356
 Date: 3/19/2026
 - updated relative filepaths to run main.py from root project directory.
 - Added `environment-alternative.yml` to resolve cross compatibility conflicts. 
+- Refactored `main.py`: 
+    1. Moved CLI header to `input.py` module to allow User interface as optional argument.
+    2. Added `ArgParse` functionality to simplify CLI.  
 
 ## Testing Instructions:
 Date: 3/19/2026
