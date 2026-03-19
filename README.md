@@ -58,7 +58,7 @@ UNCC ID: 801484356
 ## Development Log:
 Date: 3/19/2026
 - updated relative filepaths to run main.py from root project directory.
-- 
+- Added `environment-alternative.yml` to resolve cross compatibility conflicts. 
 
 ## Testing Instructions:
 Date: 3/19/2026
@@ -71,11 +71,11 @@ conda env create -f environment.yml
 ```
 For MacOS:
 ```bash
-conda env create -f environment-from-history.yml
+conda env create -f environment-alternative.yml
 ```
 Conda will automatically create an environment named finalproj with all the specified packages and versions.
 
-**Note:** if environment does not install on MacOS, install dependencies manually and run step 3. using installed python version. 
+**Note:** if environment does not install on MacOS, install dependencies listed in `dependencies.txt` manually and run step 3. using installed python version. 
 
 2. Activate the environment:
 ```bash
