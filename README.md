@@ -37,10 +37,6 @@ UNCC ID: 801484356
             ├── enzymes.csv
         └── 📁motif_id_lib
             └── 📁__pycache__
-                ├── __init__.cpython-314.pyc
-                ├── __init__.cpython-39.pyc
-                ├── input.cpython-314.pyc
-                ├── input.cpython-39.pyc
             ├── __init__.py
             ├── id_motifs.py
             ├── input.py
@@ -48,7 +44,7 @@ UNCC ID: 801484356
             ├── regx.py
         ├── main.py
     ├── dependencies.txt
-    ├── environment-from-history.yml
+    ├── environment_mac.yml
     ├── environment.yml
     ├── ideas.md
     ├── LICENSE
@@ -86,12 +82,9 @@ conda activate finalproj
 ```
 3. Run following command to test:
 ```bash
-python src/main.py inputs/test/pUC19.fasta
+python src/main.py
 ```
-or
-```bash
-python src/main.py inputs/test/pUC19.gb
-```
+
 4. Use arrows to move down checkbox list and click "space" to select enzymes. 
 
 Expected Output:
@@ -103,9 +96,6 @@ Expected Output:
 ## Instructions:
 1. Place your plasmid sequence file in the `inputs` folder (GenBank or FASTA format).
 2. Run the following script with your sequence filename:
-```
-./src/main.py ../inputs/sequence_filename
-```
 3. Check which restriction enzymes you want to identify within plasmid sequence using CLI
 4. Review output located in results folder
 
