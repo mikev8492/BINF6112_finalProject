@@ -75,7 +75,7 @@ class Enzymes:
         """
         Reads the enzyme database file and stores the list of enzymes as a dict to show the user. 
         """
-        with open("./database/enzymes.csv") as file:
+        with open("src/database/enzymes.csv") as file:
             file.readline()
             for line in file:
                 line = line.split(",")

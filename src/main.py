@@ -33,7 +33,7 @@ def create_db():
         "HaeIII"
     ]
 
-    with open("database/enzymes.csv", "w") as file:
+    with open("src/database/enzymes.csv", "w") as file:
         file.write("Enzyme,motif,cutInfo\n")
         for enzyme in CommOnly:
             if enzyme.__name__ in starting_enzyme_list:
@@ -47,29 +47,29 @@ def app_header():
     print(colored("\nREcut: Plasmid Sequence Cutting Tool\n", 'cyan', on_color='on_dark_grey', attrs=[ 'blink']))
 
 def main():
-  create_db()
+    create_db()
 
-  # load and parse sequence 
-  user_file = Sequence(sys.argv[1])
-  user_file.load_sequence()
-  app_header()
-  # plasmid: list [header, seq]
-  plasmid = user_file.sequence
-
-
-  # load and filter enzymes
-  re_list = Enzymes()
-  re_list.load_REs()
-  re_list.interface()
-  re_list.filter_enzymes()
-  # Enzymes dict name: [motif, cut]
-  enzymes = re_list.filtered
+    # load and parse sequence 
+    user_file = Sequence(sys.argv[1])
+    user_file.load_sequence()
+    app_header()
+    # plasmid: list [header, seq]
+    plasmid = user_file.sequence
 
 
-  # Print to test output
-  print(f"\nPlasmid:\n{plasmid}\n\nEnzyme list:")
-  for enzyme, info in enzymes.items():
-      print(f"\t{enzyme}: {info}")
+    # load and filter enzymes
+    re_list = Enzymes()
+    re_list.load_REs()
+    re_list.interface()
+    re_list.filter_enzymes()
+    # Enzymes dict name: [motif, cut]
+    enzymes = re_list.filtered
+
+
+    # Print to test output
+    print(f"\nPlasmid:\n{plasmid}\n\nEnzyme list:")
+    for enzyme, info in enzymes.items():
+        print(f"\t{enzyme}: {info}")
 
 
 if __name__=="__main__":

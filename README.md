@@ -57,7 +57,7 @@ UNCC ID: 801484356
 ```
 
 ## Testing Instructions:
-Date: 3/5/2026
+Date: 3/19/2026
 
 Added input.py classes to load user plasmid sequence and enzymes list. 
 
@@ -81,14 +81,12 @@ conda activate finalproj
 ```
 3. Run following command to test:
 ```bash
-cd src
-python main.py ../inputs/test/pUC19.fasta
+python src/main.py inputs/test/pUC19.fasta
 
 ```
 or
 ```bash
-cd src
-python main.py ../inputs/test/pUC19.gb
+python src/main.py inputs/test/pUC19.gb
 ```
 4. Use arrows to move down checkbox list and click "space" to select enzymes. 
 
