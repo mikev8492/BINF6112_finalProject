@@ -41,7 +41,7 @@ def create_db():
 
 
 def main():
-    create_db()
+    # create_db()
 
     # load and parse sequence 
     user_file = Sequence(sys.argv[1])
