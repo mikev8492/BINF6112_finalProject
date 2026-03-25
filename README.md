@@ -52,6 +52,22 @@ UNCC ID: 801484356
     └── README.md
 ```
 ## Development Log:
+Date: 3/25/2026
+- Refactored `main.py`:
+    - Create database function updated to conditional
+    - User arguments updated to include: 
+        - --interface: optional terminal interface
+        - --enzymes: user list of enzymes to map with
+        - --output: output filename
+    - Added argument validation
+    - Refactored main function calls to pass user arguments to input classes
+- Refactored `input.py` module:
+    - Removed error handling from `Sequence` class (handled with argparse now)
+    - Replaced `Enzymes.load_RE()` function, database is read with csv.dictReader object at the filtering function `Enzymes.filter_enzymes()`instead 
+    - Updated user interface to be optional
+    - Updated default enzyme list to use constant defined in `main.py`
+
+
 Date: 3/19/2026
 - updated relative filepaths to run main.py from root project directory.
 - Added `environment-alternative.yml` to resolve cross compatibility conflicts. 
@@ -60,9 +76,9 @@ Date: 3/19/2026
     2. Added `ArgParse` functionality to simplify CLI.  
 
 ## Testing Instructions:
-Date: 3/19/2026
+Date: 3/25/2026
 
-1. Create the environment:
+### Installation
 
 For linux:
 ```bash
@@ -76,28 +92,30 @@ Conda will automatically create an environment named finalproj with all the spec
 
 **Note:** if environment does not install on MacOS, install dependencies listed in `dependencies.txt` manually and run step 3. using installed python version. 
 
-2. Activate the environment:
+### Usage
+
+1. Activate the environment:
 ```bash
 conda activate finalproj
 ```
-3. Run following command to test:
+2. Run following command to test:
 ```bash
 python src/main.py
 ```
-
-4. Use arrows to move down checkbox list and click "space" to select enzymes. 
+#### Command-Line Arguments:
+| Argument                | Description                                  | Default         |
+| ----------------------- | -------------------------------------------- | --------------- |
+| `-s`. `--sequence_filepath`| Plasmid sequence filepath | inputs/test/pUC19.fasta         |
+| `-o`, `--output`        | Output filepath                           | results/plasmid_map|
+| `-e`, `--enzymes`       | User list of restriction enzymes             | (list of top 20)|
+| `--interface`           | Optional User interface option               | False|
 
 Expected Output:
 
-- Terminal interface displays with application header and checkbox for user to select restriction enzymes to cut with
-- prints Plasmid object (list[header, sequence]) and enzyme object (dict{enzyme: [motif, cut]})
+- Prints Plasmid object (list[header, sequence]) and enzyme object (dict{enzyme: [motif, cut]})
 
+- --interface flag option displays Terminal User Interface
 
-## Instructions:
-1. Place your plasmid sequence file in the `inputs` folder (GenBank or FASTA format).
-2. Run the following script with your sequence filename:
-3. Check which restriction enzymes you want to identify within plasmid sequence using CLI
-4. Review output located in results folder
 
 
 ## Overview:

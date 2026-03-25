@@ -56,7 +56,7 @@ def create_parser() -> argparse.Namespace:
         "-s", "--sequence_filepath",
         type=str, 
         default="inputs/test/pUC19.fasta", 
-        help="Path to the input sequence file. Accepted formats: FASTA (fasta, .fas, .fa, .fna, .ffn, .faa, .mpfa, .frn) or GenBank (.gb, .gbk)."
+        help="Path to the input plasmid sequence file. Accepted formats: FASTA (fasta, .fas, .fa, .fna, .ffn, .faa, .mpfa, .frn) or GenBank (.gb, .gbk)."
     )
 
     motif_parser.add_argument(
