@@ -93,12 +93,8 @@ class Enzymes:
         with open(self.db, "r") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                print(row)
                 if row["enzyme"] in self.usr_list:
                     enz = row["enzyme"]
                     motif = row["motif"]
                     cut = row["cutInfo"]
                     self.filtered[enz] = [motif, cut]
-        # for enzyme in self.usr_list:
-        #     val = self.renzymes[enzyme]
-        #     self.filtered[enzyme] = val
