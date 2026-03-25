@@ -1,6 +1,6 @@
 
-import inquirer, sys, re
-from termcolor import colored, cprint
+import inquirer, re, csv
+from termcolor import colored
 
 class Sequence:
     """
@@ -53,12 +53,6 @@ class Sequence:
             
         elif ".fa" in seq_file:
             self.fasta_parse()
-        # -------------------
-        # Error Handling:
-        # -------------------
-        else:
-            cprint("\nInvalid sequence filetype, please use a GenBank or FASTA file.\n", "red", "on_black",file=sys.stderr)
-            sys.exit(1)
         
 
 class Enzymes:
@@ -66,44 +60,45 @@ class Enzymes:
     Loads restriction enzymes list from database file, filters list based on user input, then stores the final list in "filtered".
     """
 
-    def __init__(self) -> None:
-        self.renzymes = {}
+    def __init__(self, database) -> None:
+        self.db = database
         self.usr_list = []
         self.filtered = {}
-        
 
-    def load_REs(self):
-        """
-        Reads the enzyme database file and stores the list of enzymes as a dict to show the user. 
-        """
-        with open("src/database/enzymes.csv") as file:
-            file.readline()
-            for line in file:
-                line = line.split(",")
-                self.renzymes[line[0]] = [line[1],line[2].strip()]
 
     def app_header(self) -> None:
         """
-        Prints application header in the terminal.
+        Prints TUI header in the terminal.
         """
         print(colored("\nREcut: Plasmid Sequence Cutting Tool\n", 'cyan', on_color='on_dark_grey', attrs=[ 'blink']))
 
-    def interface(self) -> None:
+    def interface(self, enzymes, interface) -> None:
         """
         Produces checkbox for user to filter enzyme dict. (default set manually)
         """""
-        self.app_header()
-        usr_enzymes = [
-            inquirer.Checkbox('enzymes',
-                                message="Choose your enzymes below (use the arrows and space bar to select):",
-                                choices= self.renzymes.keys(),
-                                default=['XhoI','BamHI','EcoRI']
-                                ),
-            ]
-        answers = inquirer.prompt(usr_enzymes)
-        self.usr_list = answers['enzymes']
+        if interface:
+            self.app_header()
+            usr_enzymes = [
+                inquirer.Checkbox('enzymes',
+                                    message="Choose your enzymes below (use the arrows and space bar to select):",
+                                    choices= enzymes
+                                    ),
+                ]
+            answers = inquirer.prompt(usr_enzymes)
+            self.usr_list = answers['enzymes']
+        else:
+            self.usr_list = enzymes
 
     def filter_enzymes(self) -> None:
-        for enzyme in self.usr_list:
-            val = self.renzymes[enzyme]
-            self.filtered[enzyme] = val
+        with open(self.db, "r") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                print(row)
+                if row["enzyme"] in self.usr_list:
+                    enz = row["enzyme"]
+                    motif = row["motif"]
+                    cut = row["cutInfo"]
+                    self.filtered[enz] = [motif, cut]
+        # for enzyme in self.usr_list:
+        #     val = self.renzymes[enzyme]
+        #     self.filtered[enzyme] = val

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-from genericpath import isfile
-import sys, argparse
+
+import re
+import sys, argparse, traceback
 from pathlib import Path
 from Bio.Restriction import CommOnly
 from motif_id_lib.input import Sequence, Enzymes
@@ -8,6 +9,31 @@ from motif_id_lib.input import Sequence, Enzymes
 """
 This file contains the main functions that will perform the logic for the program. 
 """
+# Constants:
+DB_FILE = "src/database/enzymes.csv"
+
+DEFAULT_ENZYMES = [
+            "EcoRI",
+            "HindIII",
+            "BamHI",
+            "XhoI",
+            "NotI",
+            "SalI",
+            "PstI",
+            "KpnI",
+            "XbaI",
+            "EcoRV",
+            "SmaI",
+            "NdeI",
+            "SacI",
+            "SpeI",
+            "BglII",
+            "ApaI",
+            "SphI",
+            "MluI",
+            "ClaI",
+            "HaeIII"
+        ]
 
 def create_parser() -> argparse.Namespace:
     '''
@@ -44,6 +70,13 @@ def create_parser() -> argparse.Namespace:
         "--interface",
         action="store_true",
         help="Enable TUI (terminal user interface) to allow manual selection of Restriction enzymes to search with."
+    )
+
+    motif_parser.add_argument(
+        "-e", "--enzymes",
+        nargs="+",
+        default = DEFAULT_ENZYMES,
+        help="List of restriction enzyme names to map to plasmid sequence."
     )
 
 
@@ -85,39 +118,15 @@ def create_db():
         Create restriction enzyme database file (CSV). Uses "CommOnly" (common type II enzymes) list of REBASE data (Bio.Restriction).
     """
     # Check if database exists:
-    filepath = Path("src/database/enzymes.csv")
+    filepath = Path(DB_FILE)
     if not filepath.is_file():
         sys.stdout.write(f"Creating database {filepath}\n")
 
-        starting_enzyme_list = [
-            "EcoRI",
-            "HindIII",
-            "BamHI",
-            "XhoI",
-            "NotI",
-            "SalI",
-            "PstI",
-            "KpnI",
-            "XbaI",
-            "EcoRV",
-            "SmaI",
-            "NdeI",
-            "SacI",
-            "SpeI",
-            "BglII",
-            "ApaI",
-            "SphI",
-            "MluI",
-            "ClaI",
-            "HaeIII"
-        ]
-
-        with open("src/database/enzymes.csv", "w") as file:
-            file.write("Enzyme,motif,cutInfo\n")
+        with open(filepath, "w") as file:
+            file.write("enzyme,motif,cutInfo\n")
             for enzyme in CommOnly:
-                if enzyme.__name__ in starting_enzyme_list:
-                    file.write(f"{enzyme},{enzyme.site},{enzyme.elucidate()}\n")
-    # sys.stdout.write(f"Database {filepath} ready\n")
+                file.write(f"{enzyme},{enzyme.site},{enzyme.elucidate()}\n")
+
 
 def main():
 
@@ -137,28 +146,30 @@ def main():
         # plasmid: list [header, seq]
         plasmid = user_file.sequence
 
-
         # load and filter enzymes
-        re_list = Enzymes()
-        re_list.load_REs()
-        re_list.interface()
+        re_list = Enzymes(DB_FILE)
+        re_list.interface(args.enzymes, args.interface) # Interface optional
         re_list.filter_enzymes()
-        # Enzymes dict name: [motif, cut]
-        enzymes = re_list.filtered
-        # =======================
 
-        # Print test output: Plasmid sequence, Enzyme list
+        # Enzymes dict: 
+        #   enzyme: [motif, cutInfo]
+        enzymes = re_list.filtered
+
+        # TEST OUTPUT: Plasmid sequence, Enzyme list
         print(f"\nPlasmid:\n{plasmid}\n\nEnzyme list:")
         for enzyme, info in enzymes.items():
             print(f"\t{enzyme}: {info}")
+        # =======================
 
 
     # Error handling:
     except ValueError as err:
         sys.stderr.write(f"Error: {err}\n")
+        traceback.print_exc()
         return 1
     except IOError as err:
         sys.stderr.write(f"Error: {err}\n")
+        traceback.print_exc()
         return 1
 
 if __name__=="__main__":
