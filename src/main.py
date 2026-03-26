@@ -32,7 +32,9 @@ DEFAULT_ENZYMES = [
             "SphI",
             "MluI",
             "ClaI",
-            "HaeIII"
+            "HaeIII",
+            "Eco91I",
+            "Eco24I"
         ]
 
 def create_parser() -> argparse.Namespace:
