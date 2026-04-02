@@ -38,6 +38,7 @@ UNCC ID: 801484356
         └── 📁motif_id_lib
             └── 📁__pycache__
             ├── __init__.py
+            ├── csv_output.py
             ├── id_motifs.py
             ├── input.py
             ├── output.py
@@ -52,6 +53,17 @@ UNCC ID: 801484356
     └── README.md
 ```
 ## Development Log:
+Date: 4/01/2026
+- Added `Motifs` class to `regx.py` module:
+    - `Motifs` class locates all instances of an enzyme motif in the plasmid sequence. 
+    - Class functions added:
+        - `array_set`: transforms the plasmid sequence to a numpy array.
+        - `motif_search`: searches for all locations of an enzyme motif in the plasmid sequence
+        - `get_motif_results`: Reports the results from `motif_search` in a dictionary containing enyzmes as keys and a list containing the corresponding motif sequence, cut site, observed motif counts, and the starting indeces of all observed motif counts as the values.
+- Refactored `main.py`:
+    - Updated function calls in `main()` to report the resulting dictionary from `Motifs.get_motif_results()`
+
+
 Date: 3/25/2026
 - Refactored `main.py`:
     - Create database function updated to conditional
