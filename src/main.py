@@ -5,7 +5,7 @@ import sys, argparse, traceback
 from pathlib import Path
 from Bio.Restriction import CommOnly
 from motif_id_lib.input import Sequence, Enzymes
-from motif_id_lib.regx import Motifs
+from motif_id_lib.motif_locator import Motifs
 
 """
 This file contains the main functions that will perform the logic for the program. 
@@ -165,14 +165,15 @@ def main():
         # =======================
 
         # =======================
-        # REGX.py - probably want to rename this file. Name is a bit misleading at the moment. 
+        # MOTIF_LOCATOR.py
         # =======================
         # Find the motif locations in the plasmide sequence. Return counts, and locations for each enzyme.
+        # load enzymes and plasmid sequence into motif locator class.
+        motif_locations = Motifs(enzymes)
+        motif_locations.array_set(plasmid[1])
 
-        motif_locator = Motifs(enzymes)
-        motif_locator.array_set(plasmid[1])
-
-        results = motif_locator.get_motif_results()
+        # Search for motif locations in plasmid sequence. Store results in a dictionary.
+        results = motif_locations.get_motif_results()
 
         # Remove code line 179-182 when the code for the csv output is generated. This is for testing purposes only.
         sys.stdout.write(f"\n Motif search results:")

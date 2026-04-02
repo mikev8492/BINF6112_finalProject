@@ -39,10 +39,9 @@ UNCC ID: 801484356
             └── 📁__pycache__
             ├── __init__.py
             ├── csv_output.py
-            ├── id_motifs.py
             ├── input.py
+            ├── motif_locator.py
             ├── output.py
-            ├── regx.py
         ├── main.py
     ├── dependencies.txt
     ├── environment_mac.yml
@@ -54,7 +53,7 @@ UNCC ID: 801484356
 ```
 ## Development Log:
 Date: 4/01/2026
-- Added `Motifs` class to `regx.py` module:
+- Added `Motifs` class to `motif_locator.py` module:
     - `Motifs` class locates all instances of an enzyme motif in the plasmid sequence. 
     - Class functions added:
         - `array_set`: transforms the plasmid sequence to a numpy array.
@@ -140,10 +139,10 @@ The `src` file contains the following:
     - Parses the plasmid sequence with each enzyme motif to identify cut locations.
     - Produces output containing an annotated map of the sequence with the enzyme cut sites in the `results` folder.
 3. `motif_id_lib`: Contains modules designated for each function within our program. These modules are:
-    - id_motifs.py: Group member responsible- Bobby
+    - motif_locator.py: Group member responsible- Bobby/Kayla
     - input.py: Group member responsible- Michael
     - output.py: Group member responsible- Michael
-    - regx.py: Group member responsible- Kayla
+    - csv_output.py: Group member responsible- Bobby/Kayla
 ## Troubleshooting:
 1. User inputs incorrect file path and incorrect file type - Check that the file/file path exists, is readable, and is the correct file format (FASTA or GenBank file)
 2. No matches found and updated dictionary returns None - Error will occur and state that no matches were identified and exists program
