@@ -52,6 +52,16 @@ UNCC ID: 801484356
     └── README.md
 ```
 ## Development Log:
+
+Date: 4/9/2026
+- Updated environment to include `matplotlib`
+- Added `annotate_plasmid` function to  `output.py` module:
+    - Uses results dictionary and plasmid sequence string to generate a circular map.
+    - A circle is drawn with radius of 1.0, and the enzyme cut locations are converted from a bp to an angle on the circle, starting from the top:
+        angle = 90° − (bp position / sequence length) × 360°
+    - A tick mark is then drawn at the calculated angle. 
+    - png graph is generated and saved to `results/plasmid_map.png`
+
 Date: 4/01/2026
 - Added `Motifs` class to `motif_locator.py` module:
     - `Motifs` class locates all instances of an enzyme motif in the plasmid sequence. 
@@ -97,7 +107,7 @@ conda env create -f environment.yml
 ```
 For MacOS:
 ```bash
-conda env create -f environment-alternative.yml
+conda env create -f environment_mac.yml
 ```
 Conda will automatically create an environment named finalproj with all the specified packages and versions.
 

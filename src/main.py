@@ -6,6 +6,7 @@ from pathlib import Path
 from Bio.Restriction import CommOnly
 from motif_id_lib.input import Sequence, Enzymes
 from motif_id_lib.motif_locator import Motifs
+from motif_id_lib.output import annotate_plasmid
 
 """
 This file contains the main functions that will perform the logic for the program. 
@@ -185,6 +186,10 @@ def main():
         # =======================
         # Generate a csv file from the motif searching results dictionary.
 
+        # =======================
+        # OUTPUT.py
+        # =======================
+        annotate_plasmid(results=results, plasmid_sequence=plasmid[1], title=plasmid[0])
 
     # Error handling:
     except ValueError as err:
