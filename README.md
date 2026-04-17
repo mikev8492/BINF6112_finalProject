@@ -32,6 +32,7 @@ UNCC ID: 801484356
             ├── pUC19.gb
     └── 📁results
         ├── plasmid_map.txt
+        ├── plasmid_results.csv
     └── 📁src
         └── 📁database
             ├── enzymes.csv
@@ -53,7 +54,14 @@ UNCC ID: 801484356
 ```
 ## Development Log:
 
-Date: 4/9/2026
+Date 04/17/2026
+- Updated `csv_output.py` module:
+    - Added `CreateCSV` class to create the CSV output file for the user.
+        - `create_csv_output` function writes the enzyme name, motif, cut site, observed count, and the start position locations as a row in the CSV file. 
+- Refactored `main.py`:
+    - Updated function calls in `main()` to create the CSV output file. 
+
+Date: 04/09/2026
 - Updated environment to include `matplotlib`
 - Added `annotate_plasmid` function to  `output.py` module:
     - Uses results dictionary and plasmid sequence string to generate a circular map.
@@ -62,7 +70,7 @@ Date: 4/9/2026
     - A tick mark is then drawn at the calculated angle. 
     - png graph is generated and saved to `results/plasmid_map.png`
 
-Date: 4/01/2026
+Date: 04/01/2026
 - Added `Motifs` class to `motif_locator.py` module:
     - `Motifs` class locates all instances of an enzyme motif in the plasmid sequence. 
     - Class functions added:
@@ -73,7 +81,7 @@ Date: 4/01/2026
     - Updated function calls in `main()` to report the resulting dictionary from `Motifs.get_motif_results()`
 
 
-Date: 3/25/2026
+Date: 03/25/2026
 - Refactored `main.py`:
     - Create database function updated to conditional
     - User arguments updated to include: 
@@ -89,7 +97,7 @@ Date: 3/25/2026
     - Updated default enzyme list to use constant defined in `main.py`
 
 
-Date: 3/19/2026
+Date: 03/19/2026
 - updated relative filepaths to run main.py from root project directory.
 - Added `environment-alternative.yml` to resolve cross compatibility conflicts. 
 - Refactored `main.py`: 
@@ -97,7 +105,7 @@ Date: 3/19/2026
     2. Added `ArgParse` functionality to simplify CLI.  
 
 ## Testing Instructions:
-Date: 3/25/2026
+Date: 03/25/2026
 
 ### Installation
 

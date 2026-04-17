@@ -7,6 +7,7 @@ from Bio.Restriction import CommOnly
 from motif_id_lib.input import Sequence, Enzymes
 from motif_id_lib.motif_locator import Motifs
 from motif_id_lib.output import annotate_plasmid
+from motif_id_lib.csv_output import CreateCSV
 
 """
 This file contains the main functions that will perform the logic for the program. 
@@ -83,6 +84,13 @@ def create_parser() -> argparse.Namespace:
         help="List of restriction enzyme names to map to plasmid sequence."
     )
 
+    motif_parser.add_argument(
+        "-c", "--csv_output",
+        type=str,
+        default="results/plasmid_results.csv",
+        help="File path to CSV output file."
+    )
+
 
     return motif_parser.parse_args()
 
@@ -114,6 +122,10 @@ def validate_arguments(args: argparse.Namespace) -> None:
     filepath = Path(args.sequence_filepath)
     if not filepath.is_file():
         raise IOError("Filepath (-s, --sequence_filepath) does not exist")
+    
+    csvpath = Path(args.csv_output)
+    if not csvpath.parent.exists():
+        raise IOError(f"Directory {args.csv_output} does not exist.")
 
 
 def create_db():
@@ -185,6 +197,11 @@ def main():
         # CSV_OUTPUT.py
         # =======================
         # Generate a csv file from the motif searching results dictionary.
+
+        csv_output_file = CreateCSV(results, args.csv_output)
+        csv_output_file.create_csv_output()
+
+        sys.stdout.write(f"\nCSV output written to {args.csv_output}")
 
         # =======================
         # OUTPUT.py
