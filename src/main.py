@@ -188,7 +188,7 @@ def main():
         # Search for motif locations in plasmid sequence. Store results in a dictionary.
         results = motif_locations.get_motif_results()
 
-        # Remove code line 179-182 when the code for the csv output is generated. This is for testing purposes only.
+        # TEST OUTPUT: motif search results dictionary items
         sys.stdout.write(f"\n Motif search results:")
         for enzyme, info in results.items():
             sys.stdout.write(f"\n\t{enzyme}: {info}")
@@ -197,7 +197,6 @@ def main():
         # CSV_OUTPUT.py
         # =======================
         # Generate a csv file from the motif searching results dictionary.
-
         csv_output_file = CreateCSV(results, args.csv_output)
         csv_output_file.create_csv_output()
 

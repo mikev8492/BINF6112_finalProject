@@ -161,6 +161,13 @@ The `src` file contains the following:
     - input.py: Group member responsible- Michael
     - output.py: Group member responsible- Michael
     - csv_output.py: Group member responsible- Bobby/Kayla
+
 ## Troubleshooting:
 1. User inputs incorrect file path and incorrect file type - Check that the file/file path exists, is readable, and is the correct file format (FASTA or GenBank file)
 2. No matches found and updated dictionary returns None - Error will occur and state that no matches were identified and exists program
+
+## References:
+Bioinformatics.org. (n.d.). IUPAC codes for nucleotides. https://www.bioinformatics.org/sms/iupac.html
+NumPy Developers. (n.d.). NumPy reference: Routines. https://numpy.org/doc/stable/reference/routines.html
+NumPy Developers. (n.d.). numpy.lib.stride_tricks.sliding_window_view. https://numpy.org/doc/stable/reference/generated/numpy.lib.stride_tricks.sliding_window_view.html
+
