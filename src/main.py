@@ -6,13 +6,17 @@ from pathlib import Path
 from Bio.Restriction import CommOnly
 from motif_id_lib.input import Sequence, Enzymes
 from motif_id_lib.motif_locator import Motifs
-from motif_id_lib.output import annotate_plasmid
+from motif_id_lib.output import PlasmidMap
 from motif_id_lib.csv_output import CreateCSV
 
 """
 This file contains the main functions that will perform the logic for the program. 
 """
-# Constants:
+# --- Constants -----------------------------
+# sys.stdout colors:
+HIGHLIGHT = "\033[36m" # teal
+RESET = "\033[0m"
+
 DB_FILE = "src/database/enzymes.csv"
 
 DEFAULT_ENZYMES = [
@@ -43,15 +47,7 @@ DEFAULT_ENZYMES = [
 def create_parser() -> argparse.Namespace:
     '''
     Description: 
-        Defines each CLI for the program
-
-    Args:
-        None
-
-    Returns:
-
-    Raises:
-        None
+        Defines CLI arguments for the program
     '''
     motif_parser = argparse.ArgumentParser(description="REcut: Plasmid Sequence Cutting Tool - Generates an annotated plasmid map with restriction enzyme cut sites.",
     formatter_class=argparse.ArgumentDefaultsHelpFormatter
@@ -62,13 +58,6 @@ def create_parser() -> argparse.Namespace:
         type=str, 
         default="inputs/test/pUC19.fasta", 
         help="Path to the input plasmid sequence file. Accepted formats: FASTA (fasta, .fas, .fa, .fna, .ffn, .faa, .mpfa, .frn) or GenBank (.gb, .gbk)."
-    )
-
-    motif_parser.add_argument(
-        "-o", "--output",
-        type=str,
-        default="results/plasmid_map",
-        help="Output filepath"
     )
 
     motif_parser.add_argument(
@@ -90,7 +79,6 @@ def create_parser() -> argparse.Namespace:
         default="results/plasmid_results.csv",
         help="File path to CSV output file."
     )
-
 
     return motif_parser.parse_args()
 
@@ -171,16 +159,17 @@ def main():
         #   enzyme: [motif, cutInfo]
         enzymes = re_list.filtered
 
-        # TEST OUTPUT: Plasmid sequence, Enzyme list
-        print(f"\nPlasmid:\n{plasmid}\n\nEnzyme list:")
+        # --- OUTPUT: Plasmid sequence, Enzyme list -------------
+        sys.stdout.write(f"\nPlasmid:\n\t{plasmid[0]}\n")
+        sys.stdout.write("\nSelected Enzyme list:\n")
         for enzyme, info in enzymes.items():
-            print(f"\t{enzyme}: {info}")
-        # =======================
+            sys.stdout.write(f"\t{enzyme}: {info}\n")
+
 
         # =======================
         # MOTIF_LOCATOR.py
         # =======================
-        # Find the motif locations in the plasmide sequence. Return counts, and locations for each enzyme.
+        # Find the motif locations in the plasmid sequence. Return counts, and locations for each enzyme.
         # load enzymes and plasmid sequence into motif locator class.
         motif_locations = Motifs(enzymes)
         motif_locations.array_set(plasmid[1])
@@ -188,26 +177,25 @@ def main():
         # Search for motif locations in plasmid sequence. Store results in a dictionary.
         results = motif_locations.get_motif_results()
 
-        # TEST OUTPUT: motif search results dictionary items
-        sys.stdout.write(f"\n Motif search results:")
-        for enzyme, info in results.items():
-            sys.stdout.write(f"\n\t{enzyme}: {info}")
-
         # =======================
         # CSV_OUTPUT.py
         # =======================
         # Generate a csv file from the motif searching results dictionary.
         csv_output_file = CreateCSV(results, args.csv_output)
         csv_output_file.create_csv_output()
-
-        sys.stdout.write(f"\nCSV output written to {args.csv_output}")
+        sys.stdout.write(f"\nRESULTS:\n{'-'*8}")
+        sys.stdout.write(f"\n\t1. CSV output written to {HIGHLIGHT}{args.csv_output}{RESET}\n")
 
         # =======================
         # OUTPUT.py
         # =======================
-        annotate_plasmid(results=results, plasmid_sequence=plasmid[1], title=plasmid[0])
+        plasmid_map = PlasmidMap(results = results, plasmid_sequence = plasmid[1], title = plasmid[0])
+        plasmid_map.annotate_circular()
+        plasmid_map.annotate_linear()
+        plasmid_map.annotate_double_stranded()
+        sys.stdout.write("\n-> DONE!\n\n")
 
-    # Error handling:
+    # --- Error handling --------------
     except ValueError as err:
         sys.stderr.write(f"Error: {err}\n")
         traceback.print_exc()
@@ -217,7 +205,5 @@ def main():
         traceback.print_exc()
         return 1
     
-    
-
 if __name__=="__main__":
     sys.exit(main())
