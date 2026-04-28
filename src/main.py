@@ -131,12 +131,16 @@ def create_db():
             for enzyme in CommOnly:
                 file.write(f"{enzyme},{enzyme.site},{enzyme.elucidate()}\n")
 
+def create_results():
+    """Creates results folder for user"""
+    folder_path = Path("results")
+    folder_path.mkdir(parents=True, exist_ok=True)
 
 def main():
 
     try:
         create_db()
-
+        create_results()
         args = create_parser()
         validate_arguments(args)
 
