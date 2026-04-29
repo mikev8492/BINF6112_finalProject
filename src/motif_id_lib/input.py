@@ -37,7 +37,7 @@ class Sequence:
         Parses FASTA file format
         """
         with open(self.filename) as file:
-            header = file.readline().strip()
+            header = file.readline().strip()[1:]
             seq = ""
             for line in file:
                 seq += line.strip()

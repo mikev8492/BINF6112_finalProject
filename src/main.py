@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-import re
-import sys, argparse, traceback
+import re, sys, argparse, traceback, time
 from pathlib import Path
 from Bio.Restriction import CommOnly
 from motif_id_lib.input import Sequence, Enzymes
@@ -46,7 +45,8 @@ DEFAULT_ENZYMES = [
 
 def create_parser() -> argparse.Namespace:
     '''
-    Description: 
+    Purpose:
+    --------
         Defines CLI arguments for the program
     '''
     motif_parser = argparse.ArgumentParser(description="REcut: Plasmid Sequence Cutting Tool - Generates an annotated plasmid map with restriction enzyme cut sites.",
@@ -61,16 +61,22 @@ def create_parser() -> argparse.Namespace:
     )
 
     motif_parser.add_argument(
-        "--interface",
+        "-i", "--interface",
         action="store_true",
         help="Enable TUI (terminal user interface) to allow manual selection of Restriction enzymes to search with."
     )
 
     motif_parser.add_argument(
+        "-ss", "--single_stranded",
+        action="store_true",
+        help="Output linear plasmid map as single-stranded."
+    )
+
+    motif_parser.add_argument(
         "-e", "--enzymes",
         nargs="+",
-        default = DEFAULT_ENZYMES,
-        help="List of restriction enzyme names to map to plasmid sequence."
+        default=DEFAULT_ENZYMES,
+        help="List of restriction enzyme names to map to plasmid sequence. Refer to src/database/enzymes.csv for exact enzyme name format."
     )
 
     motif_parser.add_argument(
@@ -85,16 +91,20 @@ def create_parser() -> argparse.Namespace:
 
 def validate_arguments(args: argparse.Namespace) -> None:
     '''
-    Description: 
+    Purpose:
+    --------
         Validate the command-line arguments
 
     Args:
+    -----
         args (argparse.Namespace): Parsed command-line arguments
 
     Returns:
+    -------
         bool: True if arguments are valid, False otherwise
 
     Raises:
+    -------
         ValueError: If any argument is invalid
     '''
     # Check filetype
@@ -118,7 +128,8 @@ def validate_arguments(args: argparse.Namespace) -> None:
 
 def create_db():
     """
-    Description: 
+    Purpose:
+    --------
         Create restriction enzyme database file (CSV). Uses "CommOnly" (common type II enzymes) list of REBASE data (Bio.Restriction).
     """
     # Check if database exists:
@@ -132,13 +143,18 @@ def create_db():
                 file.write(f"{enzyme},{enzyme.site},{enzyme.elucidate()}\n")
 
 def create_results():
-    """Creates results folder for user"""
+    """
+    Purpose:
+    --------
+        Create results folder for user.
+    """
     folder_path = Path("results")
     folder_path.mkdir(parents=True, exist_ok=True)
 
 def main():
 
     try:
+        program_start = time.perf_counter()
         create_db()
         create_results()
         args = create_parser()
@@ -195,10 +211,14 @@ def main():
         # =======================
         plasmid_map = PlasmidMap(results = results, plasmid_sequence = plasmid[1], title = plasmid[0])
         plasmid_map.annotate_circular()
-        plasmid_map.annotate_linear()
-        plasmid_map.annotate_double_stranded()
+        if args.single_stranded:
+            plasmid_map.annotate_linear()
+        else:
+            plasmid_map.annotate_double_stranded()
         sys.stdout.write("\n-> DONE!\n\n")
-
+        elapsed = time.perf_counter() - program_start
+        sys.stdout.write(f"[Execution time: {elapsed:.4f} sec.]\n\n")
+        
     # --- Error handling --------------
     except ValueError as err:
         sys.stderr.write(f"Error: {err}\n")

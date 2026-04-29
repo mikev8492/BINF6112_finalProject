@@ -139,6 +139,11 @@ python src/main.py
 | `-e`, `--enzymes`       | User list of restriction enzymes             | (list of top 20)|
 | `--interface`           | Optional User interface option               | False|
 
+NOTE: Enzymes argument format:
+```bash
+python src/main.py -e EcoRI HindIII BamHI
+```
+
 Expected Output:
 
 - Prints Plasmid object (list[header, sequence]) and enzyme object (dict{enzyme: [motif, cut]})

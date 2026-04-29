@@ -5,7 +5,7 @@ import csv
 
 class CreateCSV:
     '''
-    Using the results dictionary from motif_locatior.py, generate a CSV fiel containing the enzyme name, motif sequence, cut site, number of observations, and the starting position of all searched enzymes in teh plasmid.
+    Using the results dictionary from motif_locator.py, generate a CSV file containing the enzyme name, motif sequence, cut site, number of observations, and the starting position of all searched enzymes in the plasmid.
     '''
     def __init__(self, results: dict, output_file: str):
         self.results = results
