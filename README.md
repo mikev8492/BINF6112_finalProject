@@ -15,6 +15,9 @@ UNCC ID: 801489303
 **Bobby Luker**
 rluker@charlotte.edu
 UNCC ID: 801484356
+
+--- 
+
 ## Overview:
 **REcut** is a python tool that takes a plasmid sequence file as input and generates annotated sequence maps with Restriction Enzyme cut sites.
 
@@ -26,8 +29,6 @@ UNCC ID: 801484356
 - **Terminal User Interface** - Optional mode that displays enzyme list in the terminal for the user to select from. 
 - IUPAC ambiguity code support in recognition sequences
 - GenBank and FASTA format compatible
-
-
 
 ## Project File Structure:
 ```
@@ -69,6 +70,7 @@ The `src` file contains the following:
     - output.py: Group member responsible- Michael
     - csv_output.py: Group member responsible- Bobby/Kayla
 
+---
 
 ## Installation
 
@@ -80,6 +82,7 @@ conda env create -f environment.yml
 ```
 Conda will automatically create an environment named `finalproj` with all the specified packages and versions.
 
+---
 
 ## Usage:
 
@@ -154,6 +157,7 @@ All saved to `results` folder:
 2. Circular annotated plasmid map `.png`
 3. Linear annotated plasmid map (Double stranded or Single stranded) `.png`
 
+---
 
 ## Troubleshooting:
 1. User inputs incorrect file path and incorrect file type - Error will display. Check that the file/file path exists, is readable, and is the correct file format (FASTA or GenBank file)
@@ -171,24 +175,22 @@ We chose to use the GNU GPL to make our code easily accessible for anyone to use
 ## References:
 
 ### Python Standard Library
----
-**`re` — Regular Expressions**
-Python Software Foundation. (2024). *re — Regular expression operations*. Python 3 Documentation.
+**`re` - Regular Expressions**
+Python Software Foundation. (2024). *re - Regular expression operations*. Python 3 Documentation.
 https://docs.python.org/3/library/re.html
 Used to expand IUPAC ambiguity codes into regex character classes and locate recognition motif positions within the plasmid sequence via `re.finditer()`.
  
 **`math`**
-Python Software Foundation. (2024). *math — Mathematical functions*. Python 3 Documentation.
+Python Software Foundation. (2024). *math - Mathematical functions*. Python 3 Documentation.
 https://docs.python.org/3/library/math.html
 Used for `math.ceil()` (line-count calculations), `math.floor()` and `math.log10()` (ruler tick interval rounding), and `math.pi` (circular angle arithmetic).
  
 **`random`**
-Python Software Foundation. (2024). *random — Generate pseudo-random numbers*. Python 3 Documentation.
+Python Software Foundation. (2024). *random - Generate pseudo-random numbers*. Python 3 Documentation.
 https://docs.python.org/3/library/random.html
 Used to shuffle the enzyme colour palette with a fixed seed for reproducible random colour assignment.
 
 ### Third-Party Libraries
----
 **NumPy**
 
 NumPy Developers. (n.d.). NumPy reference: Routines. https://numpy.org/doc/stable/reference/routines.html
@@ -203,14 +205,14 @@ https://matplotlib.org/
 
 
 ### Bioinformatics Concepts & Standards
----
+
 **IUPAC Nucleotide Ambiguity Codes**
 Nomenclature Committee of the International Union of Biochemistry (NC-IUB). (1985). Nomenclature for incompletely specified bases in nucleic acid sequences. *European Journal of Biochemistry*, 150(1), 1–5.
 https://doi.org/10.1111/j.1432-1033.1985.tb08977.x
 The `IUPAC` dictionary maps ambiguity codes (R, Y, S, W, K, M, B, D, H, V, N) to their corresponding regex character classes for motif matching.
  
 **Restriction Enzyme Cut Notation**
-Rebase — The Restriction Enzyme Database. Roberts, R. J., Vincze, T., Posfai, J., & Macelis, D. (2023). REBASE: a database for DNA restriction and modification: enzymes, genes and genomes. *Nucleic Acids Research*, 51(D1), D629–D630.
+Rebase - The Restriction Enzyme Database. Roberts, R. J., Vincze, T., Posfai, J., & Macelis, D. (2023). REBASE: a database for DNA restriction and modification: enzymes, genes and genomes. *Nucleic Acids Research*, 51(D1), D629–D630.
 https://doi.org/10.1093/nar/gkac975
 https://rebase.neb.com/
 The `^` (top-strand cut) and `_` (bottom-strand cut) notation parsed by `_top_cut_offset()` and `_bot_cut_offset()` follows the REBASE convention for describing staggered and blunt restriction enzyme cleavage sites.
@@ -219,14 +221,15 @@ The `^` (top-strand cut) and `_` (bottom-strand cut) notation parsed by `_top_cu
 Watson, J. D., & Crick, F. H. C. (1953). Molecular structure of nucleic acids: A structure for deoxyribose nucleic acid. *Nature*, 171, 737–738.
 https://doi.org/10.1038/171737a0
 The `COMPLEMENT` dictionary (A↔T, G↔C) used to generate the bottom strand in `DoubleStrandedMap` is based on Watson–Crick base-pairing rules.
+
 ### Visualization Design
----
+
 **Circular Plasmid Map Style**
-SnapGene Viewer. GSL Biotech LLC. (2024). *SnapGene — Plasmid map visualisation*.
+SnapGene Viewer. GSL Biotech LLC. (2024). *SnapGene - Plasmid map visualisation*.
 https://www.snapgene.com/
 NEB Cutter. Vincze, T., Posfai, J., & Roberts, R. J. (2003). NEBcutter: A program to cleave DNA with restriction enzymes. *Nucleic Acids Research*, 31(13), 3688–3691.
 https://doi.org/10.1093/nar/gkg526
-The radial stacking algorithm in `_compute_label_radii()` — pushing overlapping labels outward in discrete radial steps — was designed to reproduce the label layout style used by these tools.
+The radial stacking algorithm in `_compute_label_radii()` - pushing overlapping labels outward in discrete radial steps - was designed to reproduce the label layout style used by these tools.
  
 **Colour Palette Design**
 Crameri, F., Shephard, G. E., & Heron, P. J. (2020). The misuse of colour in science communication. *Nature Communications*, 11, 5444.
@@ -234,7 +237,7 @@ https://doi.org/10.1038/s41467-020-19160-7
 Informed the decision to use perceptually distinct, high-contrast colours for enzyme annotation rather than sequential or single-hue palettes.
 
 ### AI assistance:
----
+
 This project was developed with the help of [Claude Sonnet 4.6](https://claude.ai) (`claude-sonnet-4-6`) by [Anthropic](https://anthropic.com).
 
 Claude assisted with:
