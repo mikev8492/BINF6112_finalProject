@@ -1,5 +1,5 @@
 # BINF 6112 Final Project Idea:
-## Multi-Database DNA Enzyme Identification Tool
+## DNA Enzyme Identification Tool
 ### Description
 Build a tool that takes information from databases like NCBI to identify and return areas for restriction enzymes and a list of characteristics for application.
 

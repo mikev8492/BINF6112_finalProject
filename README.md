@@ -1,12 +1,5 @@
 # BINF6112_finalProject
-**UNCC BINF6112 - Programming II final project.**
-
-## License: 
-**GNU General Public License Version 3**
-
-The GNU GPL is a license that ensures code is open-source. GNU GPL allows others to utilize, modify, or distribute code. If other users modify the code, then these users are expected to share their changes to the code under a GNU GPL to maintain the open-source integrity of the code.
-
-We chose to use the GNU GPL to make our code easily accessible for anyone to use, or to further build upon. 
+### **UNCC BINF6112 - Programming II final project.**
 
 [Project URL](https://github.com/mikev8492/BINF6112_finalProject)
 
@@ -22,6 +15,19 @@ UNCC ID: 801489303
 **Bobby Luker**
 rluker@charlotte.edu
 UNCC ID: 801484356
+## Overview:
+**REcut** is a python tool that takes a plasmid sequence file as input and generates annotated sequence maps with Restriction Enzyme cut sites.
+
+### Features:
+- **CSV Results File** - Results table containing enzyme list with motif, cut type, and binding location. 
+- **Circular map**  -  Circular plasmid map displaying enzyme cut locations to visualize plasmid topology and identify candidate enzymes for cloning experiments.  
+- **Double-stranded linear map** - Sequence-level map of the entire plasmid containing highlighted recognition motifs and cut marks on forward and complimentary strands. This allows visualization of enzyme overlap and overhang.  
+- **Single-stranded linear map** - Optional map containing the same sequence-level map, but with only the forward strand visualized. 
+- **Terminal User Interface** - Optional mode that displays enzyme list in the terminal for the user to select from. 
+- IUPAC ambiguity code support in recognition sequences
+- GenBank and FASTA format compatible
+
+
 
 ## Project File Structure:
 ```
@@ -31,13 +37,10 @@ UNCC ID: 801484356
             ├── pUC19.fasta
             ├── pUC19.gb
     └── 📁results
-        ├── plasmid_map.txt
-        ├── plasmid_results.csv
     └── 📁src
         └── 📁database
             ├── enzymes.csv
         └── 📁motif_id_lib
-            └── 📁__pycache__
             ├── __init__.py
             ├── csv_output.py
             ├── input.py
@@ -45,134 +48,198 @@ UNCC ID: 801484356
             ├── output.py
         ├── main.py
     ├── dependencies.txt
-    ├── environment_mac.yml
+    ├── DevLog.md
     ├── environment.yml
     ├── ideas.md
     ├── LICENSE
     ├── Pseudocode.py
     └── README.md
-```
-## Development Log:
-
-Date 04/17/2026
-- Updated `csv_output.py` module:
-    - Added `CreateCSV` class to create the CSV output file for the user.
-        - `create_csv_output` function writes the enzyme name, motif, cut site, observed count, and the start position locations as a row in the CSV file. 
-- Refactored `main.py`:
-    - Updated function calls in `main()` to create the CSV output file. 
-
-Date: 04/09/2026
-- Updated environment to include `matplotlib`
-- Added `annotate_plasmid` function to  `output.py` module:
-    - Uses results dictionary and plasmid sequence string to generate a circular map.
-    - A circle is drawn with radius of 1.0, and the enzyme cut locations are converted from a bp to an angle on the circle, starting from the top:
-        angle = 90° − (bp position / sequence length) × 360°
-    - A tick mark is then drawn at the calculated angle. 
-    - png graph is generated and saved to `results/plasmid_map.png`
-
-Date: 04/01/2026
-- Added `Motifs` class to `motif_locator.py` module:
-    - `Motifs` class locates all instances of an enzyme motif in the plasmid sequence. 
-    - Class functions added:
-        - `array_set`: transforms the plasmid sequence to a numpy array.
-        - `motif_search`: searches for all locations of an enzyme motif in the plasmid sequence
-        - `get_motif_results`: Reports the results from `motif_search` in a dictionary containing enyzmes as keys and a list containing the corresponding motif sequence, cut site, observed motif counts, and the starting indeces of all observed motif counts as the values.
-- Refactored `main.py`:
-    - Updated function calls in `main()` to report the resulting dictionary from `Motifs.get_motif_results()`
-
-
-Date: 03/25/2026
-- Refactored `main.py`:
-    - Create database function updated to conditional
-    - User arguments updated to include: 
-        - --interface: optional terminal interface
-        - --enzymes: user list of enzymes to map with
-        - --output: output filename
-    - Added argument validation
-    - Refactored main function calls to pass user arguments to input classes
-- Refactored `input.py` module:
-    - Removed error handling from `Sequence` class (handled with argparse now)
-    - Replaced `Enzymes.load_RE()` function, database is read with csv.dictReader object at the filtering function `Enzymes.filter_enzymes()`instead 
-    - Updated user interface to be optional
-    - Updated default enzyme list to use constant defined in `main.py`
-
-
-Date: 03/19/2026
-- updated relative filepaths to run main.py from root project directory.
-- Added `environment-alternative.yml` to resolve cross compatibility conflicts. 
-- Refactored `main.py`: 
-    1. Moved CLI header to `input.py` module to allow User interface as optional argument.
-    2. Added `ArgParse` functionality to simplify CLI.  
-
-## Testing Instructions:
-Date: 03/25/2026
-
-### Installation
-
-For linux:
-```bash
-conda env create -f environment.yml
-```
-For MacOS:
-```bash
-conda env create -f environment_mac.yml
-```
-Conda will automatically create an environment named finalproj with all the specified packages and versions.
-
-**Note:** if environment does not install on MacOS, install dependencies listed in `dependencies.txt` manually and run step 3. using installed python version. 
-
-### Usage
-
-1. Activate the environment:
-```bash
-conda activate finalproj
-```
-2. Run following command to test:
-```bash
-python src/main.py
-```
-#### Command-Line Arguments:
-| Argument                | Description                                  | Default         |
-| ----------------------- | -------------------------------------------- | --------------- |
-| `-s`. `--sequence_filepath`| Plasmid sequence filepath | inputs/test/pUC19.fasta         |
-| `-o`, `--output`        | Output filepath                           | results/plasmid_map|
-| `-e`, `--enzymes`       | User list of restriction enzymes             | (list of top 20)|
-| `--interface`           | Optional User interface option               | False|
-
-NOTE: Enzymes argument format:
-```bash
-python src/main.py -e EcoRI HindIII BamHI
-```
-
-Expected Output:
-
-- Prints Plasmid object (list[header, sequence]) and enzyme object (dict{enzyme: [motif, cut]})
-
-- --interface flag option displays Terminal User Interface
-
-
-
-## Overview:
-REcut is a python3 tool that takes a plasmid sequence file as input and generates an annotated sequence map with Restriction Enzyme cut sites. 
-
+```  
 The `src` file contains the following:
-1. `database` : Contains a CSV file of restriction enzymes and recognition sequence motifs. 
-2. `main.py`: Contains the logic for the program.
+1. `inputs`: Folder to upload plasmid sequences for analysis.
+    - Contains `test` folder with example plasmid files.
+2. `database` : Contains a CSV file of restriction enzymes and recognition sequence motifs. 
+3. `main.py`: Contains the logic for the program.
     - Loads the user input sequence and restriction enzymes database. 
     - Parses the plasmid sequence with each enzyme motif to identify cut locations.
     - Produces output containing an annotated map of the sequence with the enzyme cut sites in the `results` folder.
-3. `motif_id_lib`: Contains modules designated for each function within our program. These modules are:
+4. `motif_id_lib`: Contains modules designated for each function within our program. These modules are:
     - motif_locator.py: Group member responsible- Bobby/Kayla
     - input.py: Group member responsible- Michael
     - output.py: Group member responsible- Michael
     - csv_output.py: Group member responsible- Bobby/Kayla
 
-## Troubleshooting:
-1. User inputs incorrect file path and incorrect file type - Check that the file/file path exists, is readable, and is the correct file format (FASTA or GenBank file)
-2. No matches found and updated dictionary returns None - Error will occur and state that no matches were identified and exists program
 
+## Installation
+
+>Ensure conda environment manager is installed first. 
+
+Create project environment:
+```bash
+conda env create -f environment.yml
+```
+Conda will automatically create an environment named `finalproj` with all the specified packages and versions.
+
+
+## Usage:
+
+### 1. Activate the environment:
+```bash
+conda activate finalproj
+```
+### 2. Run command:
+
+#### Example 1: Default
+- Double stranded map
+- Default pUC19 plasmid - FASTA format
+- Default enzyme list (all 20). 
+```bash
+python src/main.py
+```
+
+#### Example 2: User plasmid
+- Double stranded map
+- Default enzyme list (all 20)
+- User plasmid pCMV-GLuc (mammalian vector) - GenBank format
+```bash
+python src/main.py -s inputs/test/pCMV-GLuc.gb
+```
+
+#### Example 3: User enzyme list
+- Double stranded map
+- User provided list of enzymes
+- Default pUC19 plasmid
+```bash
+python src/main.py -e EcoRI HindIII BamHI
+```
+>NOTE: Refer to `database/enzymes.csv` for full list of Type II restriction enzymes.
+
+#### Example 4: Single stranded
+- Single stranded map
+- Single stranded M13mp18 bacteriophage vector
+- Default enzyme list (all 20)
+- 
+```bash
+python src/main.py -s inputs/test/M13mp18.gb -ss
+```
+
+#### BONUS Example: TUI
+- User interface for enzyme selection
+
+- Double stranded map
+- Default pUC19 plasmid
+```bash
+python src/main.py -i
+```
+>Use keyboard arrows, and spacebar to select enzymes. Press enter to submit.
+---
+
+### Command-Line Arguments:
+| Argument                | Description                                  | Default         |
+| ----------------------- | -------------------------------------------- | --------------- |
+| `-s`. `--sequence_filepath`| Plasmid sequence filepath. Accepts FASTA and GenBank formats. | inputs/test/pUC19.fasta         |
+| `-c`. `--csv_output`| Filepath to export CSV results. | results/plasmid_results.csv |
+| `-ss`, `--single_stranded`        | Output linear map as single-stranded.  | False|
+| `-e`, `--enzymes`       | User list of restriction enzyme names     | (list of top 20)|
+| `-i`, `--interface`           | Optional User interface that displays enzyme list for selection. Use arrows and space bar to make selection.               | False|
+
+## Output:
+All saved to `results` folder:
+1. CSV file containing enzyme cut results: 
+    - enzyme
+    - motif
+    - cut_site
+    - observed_count
+    - start_positions
+2. Circular annotated plasmid map `.png`
+3. Linear annotated plasmid map (Double stranded or Single stranded) `.png`
+
+
+## Troubleshooting:
+1. User inputs incorrect file path and incorrect file type - Error will display. Check that the file/file path exists, is readable, and is the correct file format (FASTA or GenBank file)
+2. No matches found and updated dictionary returns None - Error will occur and state that no matches were identified and exits program
+
+---
+## License: 
+**GNU General Public License Version 3**
+
+The GNU GPL is a license that ensures code is open-source. GNU GPL allows others to utilize, modify, or distribute code. If other users modify the code, then these users are expected to share their changes to the code under a GNU GPL to maintain the open-source integrity of the code.
+
+We chose to use the GNU GPL to make our code easily accessible for anyone to use, or to further build upon. 
+
+--- 
 ## References:
-Bioinformatics.org. (n.d.). IUPAC codes for nucleotides. https://www.bioinformatics.org/sms/iupac.html
+
+### Python Standard Library
+---
+**`re` — Regular Expressions**
+Python Software Foundation. (2024). *re — Regular expression operations*. Python 3 Documentation.
+https://docs.python.org/3/library/re.html
+Used to expand IUPAC ambiguity codes into regex character classes and locate recognition motif positions within the plasmid sequence via `re.finditer()`.
+ 
+**`math`**
+Python Software Foundation. (2024). *math — Mathematical functions*. Python 3 Documentation.
+https://docs.python.org/3/library/math.html
+Used for `math.ceil()` (line-count calculations), `math.floor()` and `math.log10()` (ruler tick interval rounding), and `math.pi` (circular angle arithmetic).
+ 
+**`random`**
+Python Software Foundation. (2024). *random — Generate pseudo-random numbers*. Python 3 Documentation.
+https://docs.python.org/3/library/random.html
+Used to shuffle the enzyme colour palette with a fixed seed for reproducible random colour assignment.
+
+### Third-Party Libraries
+---
+**NumPy**
+
 NumPy Developers. (n.d.). NumPy reference: Routines. https://numpy.org/doc/stable/reference/routines.html
+
 NumPy Developers. (n.d.). numpy.lib.stride_tricks.sliding_window_view. https://numpy.org/doc/stable/reference/generated/numpy.lib.stride_tricks.sliding_window_view.html
 
+**Matplotlib**
+
+Hunter, J. D. (2007). Matplotlib: A 2D graphics environment. *Computing in Science & Engineering*, 9(3), 90–95.
+https://doi.org/10.1109/MCSE.2007.55
+https://matplotlib.org/
+
+
+### Bioinformatics Concepts & Standards
+---
+**IUPAC Nucleotide Ambiguity Codes**
+Nomenclature Committee of the International Union of Biochemistry (NC-IUB). (1985). Nomenclature for incompletely specified bases in nucleic acid sequences. *European Journal of Biochemistry*, 150(1), 1–5.
+https://doi.org/10.1111/j.1432-1033.1985.tb08977.x
+The `IUPAC` dictionary maps ambiguity codes (R, Y, S, W, K, M, B, D, H, V, N) to their corresponding regex character classes for motif matching.
+ 
+**Restriction Enzyme Cut Notation**
+Rebase — The Restriction Enzyme Database. Roberts, R. J., Vincze, T., Posfai, J., & Macelis, D. (2023). REBASE: a database for DNA restriction and modification: enzymes, genes and genomes. *Nucleic Acids Research*, 51(D1), D629–D630.
+https://doi.org/10.1093/nar/gkac975
+https://rebase.neb.com/
+The `^` (top-strand cut) and `_` (bottom-strand cut) notation parsed by `_top_cut_offset()` and `_bot_cut_offset()` follows the REBASE convention for describing staggered and blunt restriction enzyme cleavage sites.
+ 
+**DNA Complementarity**
+Watson, J. D., & Crick, F. H. C. (1953). Molecular structure of nucleic acids: A structure for deoxyribose nucleic acid. *Nature*, 171, 737–738.
+https://doi.org/10.1038/171737a0
+The `COMPLEMENT` dictionary (A↔T, G↔C) used to generate the bottom strand in `DoubleStrandedMap` is based on Watson–Crick base-pairing rules.
+### Visualization Design
+---
+**Circular Plasmid Map Style**
+SnapGene Viewer. GSL Biotech LLC. (2024). *SnapGene — Plasmid map visualisation*.
+https://www.snapgene.com/
+NEB Cutter. Vincze, T., Posfai, J., & Roberts, R. J. (2003). NEBcutter: A program to cleave DNA with restriction enzymes. *Nucleic Acids Research*, 31(13), 3688–3691.
+https://doi.org/10.1093/nar/gkg526
+The radial stacking algorithm in `_compute_label_radii()` — pushing overlapping labels outward in discrete radial steps — was designed to reproduce the label layout style used by these tools.
+ 
+**Colour Palette Design**
+Crameri, F., Shephard, G. E., & Heron, P. J. (2020). The misuse of colour in science communication. *Nature Communications*, 11, 5444.
+https://doi.org/10.1038/s41467-020-19160-7
+Informed the decision to use perceptually distinct, high-contrast colours for enzyme annotation rather than sequential or single-hue palettes.
+
+### AI assistance:
+---
+This project was developed with the help of [Claude Sonnet 4.6](https://claude.ai) (`claude-sonnet-4-6`) by [Anthropic](https://anthropic.com).
+
+Claude assisted with:
+- Code architecture and implementation
+- Docstring and documentation writing
+- Debugging and code review
+
+All generated code was reviewed and tested by the authors.

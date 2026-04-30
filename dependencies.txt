@@ -1,4 +1,5 @@
 biopython
+matplotlib
 numpy
 termcolor
 inquirer
